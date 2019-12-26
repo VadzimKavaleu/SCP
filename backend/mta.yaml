@@ -1,0 +1,47 @@
+﻿ID: lev_backend
+_schema-version: 3.1.0
+version: 1.0.0
+
+modules:
+    -
+        name: lev_db
+        type: hdb
+        path: db
+        provides:
+            - {name: lev_db, public: true}
+        parameters:
+            memory: 256M
+            disk-quota: 256M
+        requires:
+            - {name: lev_hdi}
+    -
+        name: lev_srv
+        type: nodejs
+        path: srv
+        properties:
+            XS_APP_LOG_LEVEL: debug
+        parameters:
+            memory: 256M
+            disk-quota: 1024M
+        provides:
+            - {name: lev_srv, public: true, properties: {url: '${default-url}'}}
+        requires:
+            - {name: lev_db}
+            - {name: lev_hdi}
+            - {name: lev_uaa}
+            - {name: lev_dest}
+            - {name: lev_conn}
+
+resources:
+    -
+        name: lev_hdi
+        type: org.cloudfoundry.existing-service
+    -
+        name: lev_uaa
+        type: org.cloudfoundry.existing-service
+    -
+        name: lev_dest
+        type: org.cloudfoundry.existing-service
+    -
+        name: lev_conn
+        type: org.cloudfoundry.existing-service
