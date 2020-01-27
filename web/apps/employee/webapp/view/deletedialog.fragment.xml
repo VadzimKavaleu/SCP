@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core">
+    <Dialog id="openDialog" title="Dialog box">
+        <VBox class="sapUiSmallMargin">
+            <f:SimpleForm id="id1" editable="true" layout="ResponsiveGridLayout"
+                          title="Do you want to delete data?" labelSpanXL="3" labelSpanL="3"
+                          labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+                          emptySpanM="4" emptySpanS="0" columnsXL="1"
+                          columnsL="1" columnsM="1" singleContainerFullSize="false">
+                <f:content>
+
+                </f:content>
+            </f:SimpleForm>
+        </VBox>
+        <buttons>
+            <Button text="Submit" id="btn0" press=".deleteDialog"/>
+            <Button text="Cancel" press="delcloseDialog"/>
+
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

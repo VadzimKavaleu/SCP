@@ -1,0 +1,28 @@
+{
+  "welcomeFile": "/cp.portal",
+  "authenticationMethod": "none",
+  "routes": [
+    {
+      "source": "^/sapui5_resources/(.*)$",
+      "target": "$1",
+      "destination": "sapui5_provider"
+    },
+    {
+      "source": "^/s4c/(.*)",
+      "target": "/$1",
+      "destination": "S4C"
+    },
+    {
+      "source": "/api/(.*)",
+      "target": "$1",
+      "destination": "lev_srv",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/(.*)$",
+      "target": "$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}

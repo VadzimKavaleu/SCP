@@ -1,0 +1,27 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core">
+    <Dialog id="openDialog1" title="Dialog box">
+        <VBox class="sapUiSmallMargin">
+            <f:SimpleForm id="id0" editable="true" layout="ResponsiveGridLayout"
+                          title="Change the data" labelSpanXL="3" labelSpanL="3"
+                          labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+                          emptySpanM="4" emptySpanS="0" columnsXL="1"
+                          columnsL="1" columnsM="1" singleContainerFullSize="false">
+                <f:content>
+                    <Label text="ID"/>
+                    <Text text="{person>EMID}" id="input"/>
+                    <Label text="Name"/>
+                    <Input width="50%" id="input0" value="{person>NAME}"/>
+                    <Label text="surname"/>
+                    <Input width="50%" id="input1" value="{person>SURNAME}"/>
+                    <Label text="email"/>
+                    <Input width="50%" id="input2" value="{person>EMAIL}"/>
+                </f:content>
+            </f:SimpleForm>
+        </VBox>
+        <buttons>
+            <Button text="Update" type="submit" press=".updateDialog"/>
+            <Button text="Cancel" press=".closeDialog"/>
+
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

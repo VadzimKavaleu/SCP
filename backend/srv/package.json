@@ -16,6 +16,7 @@
     "async": "latest",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "hdb": "^0.16.0",
     "passport": "^0.4.0",

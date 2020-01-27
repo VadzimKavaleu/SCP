@@ -1,0 +1,42 @@
+﻿ID: lev_router
+_schema-version: 3.1.0
+version: 1.0.0
+
+modules:
+    -
+        name: router
+        type: nodejs
+        path: ./
+        properties:
+            XS_APP_LOG_LEVEL: debug
+        build-parameters:
+            ignore: [".git/", ".idea/", ".gitignore", ".gitlab-ci.yml", "mta.jar", "mta.yaml"]
+        parameters:
+            disk-quota: 256M
+            memory: 128M
+        requires:
+            - {name: lev_router}
+            - {name: lev_conn}
+            - {name: lev_dest}
+            - {name: lev_uaa}
+            - {name: lev_srv, group: destinations, properties: {name: lev_srv, url: '~{url}', forwardAuthToken: true}}
+resources:
+    -
+        name: lev_srv
+        type: configuration
+        parameters:
+            provider-nid: mta
+            provider-id: 'lev_backend:lev_srv'
+            version: '>=0.0.1'
+    -
+        name: lev_dest
+        type: org.cloudfoundry.existing-service
+    -
+        name: lev_conn
+        type: org.cloudfoundry.existing-service
+    -
+        name: lev_uaa
+        type: org.cloudfoundry.existing-service
+    -
+        name: lev_router
+        type: org.cloudfoundry.existing-service

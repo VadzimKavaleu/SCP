@@ -1,0 +1,143 @@
+{
+  "_version": "1.8.0",
+  "sap.app": {
+    "id": "employee",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "sourceTemplate": {
+      "id": "html5moduletemplates.basicSAPUI5ApplicationProjectModule",
+      "version": "1.40.12"
+    },
+    "dataSources": {
+      "odata": {
+        "uri": "/../api/odata/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      },
+      "local_odata": {
+        "uri": "http://localhost:3000/odata/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    },
+    "supportedThemes": [
+      "sap_hcb",
+      "sap_belize"
+    ]
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "employee.view.App",
+      "type": "XML"
+    },
+    "dependencies": {
+      "minUI5Version": "1.60.1",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.ui.layout": {},
+        "sap.ushell": {},
+        "sap.collaboration": {},
+        "sap.ui.comp": {},
+        "sap.uxap": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "employee.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "odata",
+        "settings": {
+          "operationMode": "Server",
+          "synchronizationMode": "None"
+        },
+        "preload": true
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "viewPath": "employee.view",
+        "bypassed": {
+          "target": "NotFound"
+        }
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "Master",
+          "target": "Master"
+        },
+        {
+          "name": "Detail",
+          "pattern": "Detail/{id}",
+          "target": [
+            "Detail"
+          ]
+        },
+        {
+          "pattern": "Test",
+          "name": "Test",
+          "target": "Test"
+        }
+      ],
+      "targets": {
+        "Master": {
+          "viewType": "XML",
+          "viewName": "Master"
+        },
+        "Detail": {
+          "viewType": "XML",
+          "viewName": "Detail"
+        },
+        "Test": {
+          "viewType": "XML",
+          "viewName": "Test"
+        }
+      }
+    }
+  }
+}

@@ -18,12 +18,12 @@ module.exports = () => {
         try {
             const db = new dbClass(req.db);
 
-            const oUser = _prepareObject(req.body, req);
+            let oUser = _prepareObject(req.body, req);
             //oUser.usid = await db.getNextval("usid");
 
 
             const sSql = "SELECT * FROM \"EMPLOYEE\"";
-            oUser.employeers = await db.executeUpdate(sSql);
+            oUser = await db.executeUpdate(sSql);
 
 
 
@@ -94,13 +94,13 @@ module.exports = () => {
         try {
             const db = new dbClass(req.db);
 
-            const oUser = _prepareObject(req.body, req);
+            let oUser = _prepareObject(req.body, req);
             //oUser.usid = await db.getNextval("usid");
 
             const id = req.params.emid;
             const sSql = "SELECT * FROM \"EMPLOYEE\" WHERE \"EMID\" = ?";
                 const aValue = [id];
-            oUser.employeers = await db.executeUpdate(sSql, aValue);
+            oUser = await db.executeUpdate(sSql, aValue);
 
 
 

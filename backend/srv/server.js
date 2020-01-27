@@ -12,6 +12,8 @@ const compression = require("compression");
 const cds = require("@sap/cds");
 const bodyParser = require('body-parser');
 
+var cors = require('cors')
+
 if (process.argv[2] === "--debug") {
     global.DEBUG_MODE = true;
     //Load environment variables for CLOUD
@@ -27,6 +29,7 @@ const app = express();
 
 //Body parser
 app.use(bodyParser.json());
+app.use(cors());
 
 //Compression
 app.use(compression({

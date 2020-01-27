@@ -1,0 +1,52 @@
+<mvc:View
+        xmlns:mvc="sap.ui.core.mvc"
+        xmlns="sap.m"
+        xmlns:f="sap.ui.layout.form"
+        xmlns:core="sap.ui.core"
+        controllerName="employee.controller.Detail">
+    <Page showHeader="false">
+        <VBox>
+            <Panel id="panel">
+                <headerToolbar>
+                    <Toolbar>
+                        <Title text="address {addr>/emid}" id="idCountTitle"/>
+                        <ToolbarSpacer/>
+                        <Button
+                                text="Back"
+                                icon="sap-icon://action-back"
+                                tooltip="{i18n>onSettings}"
+                                press="onClick"/>
+                    </Toolbar>
+                </headerToolbar>
+                <content>
+                    <Label text="id" width="100%"/>
+                    <Input value="{addr>/adid}" width="40%"/>
+                    <Label text="City" width="100%"/>
+                    <Input value="{addr>/city}" id="input3" width="40%"/>
+                    <Label text="Street" width="100%"/>
+                    <Input value="{addr>/strt}" id="input4" width="40%"/>
+                    <Label text="Home" width="100%"/>
+                    <Input value="{addr>/hnum}" id="input5" width="40%"/>
+                    <Label text="Phone" width="100%"/>
+                    <Input value="{addr>/phone}" id="input6" width="40%"/>
+                </content>
+
+            </Panel>
+
+        </VBox>
+        <VBox items="{ path: 'laptop>/value'}">
+            <Panel id="panel1" expandable="true" expanded="false">
+                <Title text="Laptop {laptop>emid}"/>
+
+                <content>
+                    <Label text="id" width="100%"/>
+                    <Input value="{laptop>lpid}" width="40%"/>
+                    <Label text="Brand" width="100%"/>
+                    <Input value="{laptop>brand}" width="40%"/>
+
+                </content>
+
+            </Panel>
+        </VBox>
+    </Page>
+</mvc:View>

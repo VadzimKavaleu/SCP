@@ -1,0 +1,143 @@
+<mvc:View
+        xmlns:mvc="sap.ui.core.mvc"
+        xmlns="sap.m"
+        xmlns:f="sap.ui.layout.form"
+        xmlns:core="sap.ui.core"
+        controllerName="employee.controller.Master">
+    <Page>
+        <subHeader>
+            <Bar>
+                <contentLeft>
+                    <SearchField search="handleSearch" placeholder="Search by Name or Surname"/>
+                </contentLeft>
+            </Bar>
+        </subHeader>
+
+        <headerContent>
+            <ToolbarSpacer/>
+            <Button
+                    icon="sap-icon://add"
+                    tooltip="{i18n>onSettings}"
+                    text="Create Employee"
+                    press="onSettings"/>
+            <Button
+                    class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                    text="sort name"
+                    icon="sap-icon://sort"
+                    tooltip="Sort Categories"
+                    press="sortName">
+            </Button>
+            <Button
+
+                    text="clear sort"
+                    tooltip="Clear Categories"
+                    icon="sap-icon://sys-cancel"
+                    press="clearAllSortings"/>
+
+        </headerContent>
+
+        <content>
+            <Table mode="SingleSelectLeft" growing="true" growingScrollToLoad="true"
+                   items="{ path: 'person>/', sorter: [{path: 'EMID', ascending: 'true', group: 'true'}]}" id="List" selectionChange="onSelectionChange">
+                <items>
+                    <ColumnListItem press="onClick" type="Navigation" id="item0">
+                        <cells>
+
+                            <Text text="{person>EMID}" id="text0"/>
+                            <Text text="{person>NAME}" id="text1"/>
+                            <Text text="{person>SURNAME}" id="text2"/>
+                            <Text text="{person>EMAIL}" id="text3"/>
+                            <Button type="Accept" text="Update" press="onUpdate" icon="sap-icon://add-equipment"
+                                    id="btn-update"/>
+                            <Button type="Reject" text="Delete" press="onDelete" icon="sap-icon://delete"
+                                    class="reset-btn" id="btn-delete"/>
+
+
+                        </cells>
+                    </ColumnListItem>
+                </items>
+                <columns>
+                    <Column id="column0">
+                        <header>
+                            <Label text="ID" id="label0" sortProperty="Name"/>
+                        </header>
+                    </Column>
+                    <Column id="column1">
+                        <header>
+                            <Label text="Name" id="label1"/>
+                        </header>
+                    </Column>
+                    <Column id="column2">
+                        <header>
+                            <Label text="surname" id="label2"/>
+                        </header>
+                    </Column>
+                    <Column id="column3">
+                        <header>
+                            <Label text="email" id="label3"/>
+                        </header>
+                    </Column>
+                    <Column id="column4">
+                        <header>
+                            <Label text="Update"/>
+                        </header>
+                    </Column>
+                    <Column id="column5">
+                        <header>
+                            <Label text="Delete"/>
+                        </header>
+                    </Column>
+                </columns>
+            </Table>
+
+        </content>
+
+        <f:SimpleForm
+                title="Employee Create"
+                editable="true"
+                layout="ResponsiveGridLayout"
+                visible="false"
+                id="form0"
+                labelSpanXL="12" labelSpanL="12" labelSpanM="12"
+                labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+                emptySpanS="0" columnsXL="3" columnsL="3" columnsM="3" singleContainerFullSize="false">
+            <f:content>
+                <core:Title text="Employee"/>
+                <VBox>
+                    <Label text="{i18n>emid}"/>
+                    <Input value="{data>/emid}" enabled="false"/>
+
+                    <Label text="{i18n>name}"/>
+                    <Input maxLength="70" value="{data>/name}" id="input0" name="name"/>
+
+                    <Label text="{i18n>surname}"/>
+                    <Input maxLength="70" value="{data>/name}" id="input1" name="surname"/>
+
+                    <Label text="{i18n>email}"/>
+                    <Input maxLength="70" value="{data>/name}" id="input2" name="email"/>
+
+                </VBox>
+
+
+            </f:content>
+        </f:SimpleForm>
+
+
+        <footer>
+            <OverflowToolbar visible="{config>/isEdit}">
+                <ToolbarSpacer/>
+                <Button type="Accept" text="{i18n>save}" press="onSave">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow"/>
+                    </layoutData>
+                </Button>
+                <Button type="Reject" text="{i18n>cancel}" press="onCancel" class="reset-btn">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow"/>
+                    </layoutData>
+                </Button>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+
+</mvc:View>

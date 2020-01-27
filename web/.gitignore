@@ -1,0 +1,11 @@
+sonarqube.bat
+.scannerwork
+.mta
+.idea
+node_modules/
+dist/
+build/
+*.mtar
+**/coverage_reports/*
+deployer/resources/
+*.iml
