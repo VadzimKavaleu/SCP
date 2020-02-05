@@ -1,0 +1,92 @@
+_schema-version: 2.0.0
+ID: employee
+version: 1.0.0
+
+modules:
+
+  - name: approuter
+    type: approuter.nodejs
+    path: approuter
+    parameters:
+      memory: 256M
+      disk-quota: 256M
+    requires:
+      - name: employee-router
+      - name: lev_conn
+      - name: lev_dest
+      - name: employee-uaa
+      - name: srv
+        group: destinations
+        properties:
+          name: srv
+          url: "~{url}"
+          forwardAuthToken: true
+
+  - name: db
+    type: hdb
+    path: db
+    parameters:
+      memory: 256M
+      disk-quota: 256M
+    requires:
+      - name: employee-hdi
+    provides:
+      - name: db
+
+  - name: srv
+    type: java
+    path: srv
+    properties:
+      SPRING_PROFILES_ACTIVE: cloud
+      db_service_instance_name: employee-hdi
+    build-parameters:
+      build-result: target/*.jar
+    parameters:
+      memory: 1024M
+      disk-quota: 512M
+    provides:
+      - name: srv
+        properties:
+          url: ${default-url}
+    requires:
+      - name: db
+      - name: employee-hdi
+      - name: employee-uaa
+      - name: lev_dest
+      - name: lev_conn
+
+resources:
+
+  - name: employee-router
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+
+  - name: lev_conn
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite
+
+  - name: lev_dest
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+
+  - name: employee-hdi
+    type: com.sap.xs.hdi-container
+    parameters:
+      service-plan: hdi-shared
+      service: hanatrial
+      config: { schema: EMPLOYEE_SAMPLE_SCP }
+    properties:
+      hdi-container-name: ${service-name}
+
+  - name: employee-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa

@@ -1,0 +1,21 @@
+---
+server.port: ${PORT:8080} # get the server port from (CF) environment if present. Otherwise fallback to 8080.
+
+spring:
+  datasource:
+    url: "jdbc:sqlite:file:local.db?cache=shared"
+    driverClassName: org.sqlite.JDBC
+    initialization-mode: never
+
+---
+# Cloud Foundry Specific Overrides.
+spring:
+  profiles: cloud    # to activate the profile the 'spring.profiles.active' environment property needs to be set
+  datasource:        # read the data source connection properties from VCAP_SERVICES
+    url:             ${vcap.services.${db_service_instance_name}.credentials.url}
+    username:        ${vcap.services.${db_service_instance_name}.credentials.user}
+    password:        ${vcap.services.${db_service_instance_name}.credentials.password}
+    driverClassName: ${vcap.services.${db_service_instance_name}.credentials.driver}
+    type:            com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximumPoolSize: 10

@@ -1,0 +1,10 @@
+---
+spring:
+  datasource:
+    url:             jdbc:sap://zeus.hana.prod.eu-central-1.whitney.dbaas.ondemand.com:23803?encrypt=true&validateCertificate=true&currentschema=EMPLOYEE_SAMPLE_SCP
+    username:        EMPLOYEE_SAMPLE_SCP_57YG1C60GKFJILYGRXNL4TYLH_RT
+    password:        Wo1C-6zVD8IEhfryyDIHoVaxB1mJnwF12w.3i5s.Hu-Yhqzqn5W9R7BsuF-UwDtCUcJRTFZg3rCZWFf47RrwcrZLPgnQkC9EQmqVjkmO8JiJxRnYzTdHQM2oy0PthPeo
+    driverClassName: com.sap.db.jdbc.Driver
+    type:            com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximumPoolSize: 10

@@ -1,0 +1,60 @@
+{
+  "xsappname": "sample",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of called application",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.insert",
+      "description": "Insert"
+    },
+    {
+      "name": "$XSAPPNAME.view",
+      "description": "View"
+    },
+    {
+      "name": "$XSAPPNAME.update",
+      "description": "Update"
+    },
+    {
+      "name": "$XSAPPNAME.delete",
+      "description": "Delete"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Manager",
+      "description": "All activities",
+      "scope-references": [
+        "uaa.user",
+        "$XSAPPNAME.insert",
+        "$XSAPPNAME.view",
+        "$XSAPPNAME.update",
+        "$XSAPPNAME.delete"
+      ]
+    },
+    {
+      "name": "Visitor",
+      "description": "Only view",
+      "scope-references": [
+        "uaa.user",
+        "$XSAPPNAME.view"
+      ]
+    }
+  ],
+  "role-collections": [
+    {
+      "name": "Visitor",
+      "description": "Just visitor",
+      "role-template-references": [
+        "$XSAPPNAME.Visitor"
+      ]
+    },
+    {
+      "name": "Manager",
+      "description": "Manager",
+      "role-template-references": [
+        "$XSAPPNAME.Manager"
+      ]
+    }
+  ]
+}
